@@ -1,0 +1,33 @@
+Commands AI project I
+
+conda activate env_ai_2_7
+
+python pacman.py -p SearchAgent -a fn=depthFirstSearch
+
+
+
+
+def get_fmri_data(root_pth, task_type):
+    '''Get fmri data for a given task ''' 
+    fmri_total = []
+    subj_list = []
+    for f in glob.glob(os.path.join(root_pth, task_type)+'/*.txt'):
+        subj = f.split('/')[-1].split('_')[0]
+        subj_list.append(subj)
+        filename = os.path.join(root_pth, task_type)+'/'+ subj +'_schaefer_400ROI_'+ task_type.lower()+'.txt'
+        #print(filename)
+        ts_df = np.loadtxt(filename)
+        fmri_total.append(ts_df)
+    #Return 
+    fmri_total = np.array(fmri_total)
+    
+    return fmri_total, subj_list
+
+root_pth = '/camcan/schaefer_parc/'
+task_type = 'Rest'
+fmri, subj_list = get_fmri_data(root_pth, task_type)
+
+
+MR SALIL VINIT KULKARNI
+
+
